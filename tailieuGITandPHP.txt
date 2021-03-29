@@ -1,0 +1,38 @@
+13.114.24.207
+
+$path = Storage::url(config('admin.upload.directory.image') . Mark::SLASH . $fileName);
+
+$path = Storage::getAdapter()->getClient()
+    ->getObjectUrl(
+        config('filesystems.disks.s3.bucket'),
+        config('admin.upload.directory.image') . Mark::SLASH . $fileName
+    );
+
+
+git clean -fd 
+git commit --amen || --am  ("có tác dụng dùng để lấy lại commit trước không muốn thay đổi hay thêm message")
+shift : q! để thoát màn hình khi git commit --am
+git push -f 
+
+php artisan migrate --path=database/migrations
+
+
+
+deploy trên stg 
+cd /usr/local/var/www/201906_MEO-Cloud/
+
+
+cách 1:
+sudo -i hoặc không cần cũng được
+sudo git fetch -a  hoặc chỉ đúng tên pull đó thì: sudo git fetch origin/tên nhánh của mình
+sudo sh deploy.sh -b hapo-bug/task-1370
+sudo npm run dev
+sudo composer dump-autoload
+
+
+cách 2:
+sudo git checkout .
+sudo git fetch -a  hoặc chỉ đúng tên pull đó thì: sudo git fetch origin/tên nhánh của mình
+sudo git checkout tên nhánh mình làm
+sudo npm run dev
+sudo composer dump-autoload
